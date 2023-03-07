@@ -57,4 +57,25 @@ final class NetworkProvider {
                 }
             }
     }
+    
+    func getProductDetail(productId: String,
+                          success: @escaping (_ itemData: [ItemData]) -> (),
+                          failure: @escaping (_ error: Error?) -> ()) {
+        
+        let url = "\(KBaseUrl)/items?ids=\(productId)"
+        
+        AF.request(url, method: .get)
+            .validate(statusCode: kStatusOk)
+            .responseDecodable (of: [ItemData].self) { response in
+                
+                if let productData = response.value {
+                    success(productData)
+                }
+                
+                if let responseError = response.error {
+                    print("[\(NetworkProvider.self)] - getProductDetail: \(responseError)")
+                    failure(response.error)
+                }
+            }
+    }
 }

@@ -23,10 +23,15 @@ class ListProductsRouter: NSObject, ListProductsRoutingLogic, ListProductsDataPa
     // MARK: Routing
     
     func routeToProductDetail(with productId: String) {
+        let storyboard = UIStoryboard(name: Constants.kProductDetailStoryboard, bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: Constants.kProductDetailViewController) as! ProductDetailViewController
+        destinationVC.productId = productId
+        navigateToSomewhere(source: viewController!, destination: destinationVC)
     }
     
     // MARK: Navigation
     
     func navigateToSomewhere(source: ListProductsViewController, destination: ProductDetailViewController) {
+        source.show(destination, sender: nil)
     }
 }

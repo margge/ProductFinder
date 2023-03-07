@@ -16,4 +16,7 @@ struct Constants {
     
     static let kUnSafeHttp = "http://"
     static let kSafeHttp = "https://"
+    
+    static let kProductDetailStoryboard = "ProductDetail"
+    static let kProductDetailViewController = "ProductDetailViewController"
 }
