@@ -10,6 +10,7 @@ import SDWebImage
 
 protocol ListProductsDisplayLogic {
     func displayProducts(viewModel: ListProducts.Load.ViewModel)
+    func displayErrorAlert()
 }
 
 class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
@@ -63,7 +64,8 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
     }
     
     func setupView() {
-        productsCollectionView.register(UINib(nibName: Constants.kProductCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: Constants.kProductCellIdentifier)
+        productsCollectionView.register(UINib(nibName: Constants.kProductCollectionViewCell, bundle: nil),
+                                        forCellWithReuseIdentifier: Constants.kProductCellIdentifier)
         productsCollectionView.dataSource = self
         productsCollectionView.delegate = self
         productSearchBar.delegate = self
@@ -84,6 +86,19 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
         productsList = viewModel.productListViewModel.results
         productsCollectionView.reloadData()
         hideLoading()
+    }
+    
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Oops!",
+                                      message: "Parece que algo no salió bien, por favor intenta de nuevo",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Reintentar",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {(_: UIAlertAction!) in
+            self.loadProducts()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func showLoading() {
