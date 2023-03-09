@@ -12,8 +12,8 @@ final class NetworkProvider {
     
     static let shared = NetworkProvider()
     
-    private let kBaseSite = "MLA"
-    private let kBaseCategory = "MLA5725"
+    private let kBaseSite = "MLC"
+    private let kBaseCategory = "MLC1144"
     private let KBaseUrl = "https://api.mercadolibre.com/"
     private let kStatusOk = 200...299
     
