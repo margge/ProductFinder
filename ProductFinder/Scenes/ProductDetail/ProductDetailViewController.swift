@@ -10,6 +10,7 @@ import SDWebImage
 
 protocol ProductDetailDisplayLogic {
     func displayProductDetail(viewModel: ProductDetail.GetProductDetail.ViewModel)
+    func displayErrorAlert()
 }
 
 class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
@@ -82,9 +83,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     func displayProductDetail(viewModel: ProductDetail.GetProductDetail.ViewModel) {
         let itemViewModel = viewModel.productItemViewModel
-        
-        print("********"+itemViewModel.description)
-        
+                
         productConditionLabel.text = itemViewModel.condition
         productTittleLabel.text = itemViewModel.title
         if let productThumbnail = itemViewModel.thumbnail {
@@ -94,5 +93,24 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
         productQuantityLabel.text = itemViewModel.availableQuantity
         productWarrantyLabel.text = itemViewModel.warranty
         productDescriptionLabel.text = itemViewModel.description
+    }
+    
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Oops!",
+                                      message: "Parece que algo no salió bien, por favor intenta de nuevo",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Volver",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {(_: UIAlertAction!) in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Reintentar",
+                                      style: UIAlertAction.Style.default,
+                                      handler: {(_: UIAlertAction!) in
+            self.getProductDetail()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProductDetailPresentationLogic {
     func presentProductDetail(response: ProductDetail.GetProductDetail.Response)
+    func presentError()
 }
 
 class ProductDetailPresenter: ProductDetailPresentationLogic {
@@ -53,5 +54,9 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
             let viewModel = ProductDetail.GetProductDetail.ViewModel(productItemViewModel: productDetailViewModel)
             viewController?.displayProductDetail(viewModel: viewModel)
         }
+    }
+    
+    func presentError() {
+        viewController?.displayErrorAlert()
     }
 }
