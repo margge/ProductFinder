@@ -287,8 +287,8 @@
 		238F10E329B79F6600534A60 /* ListProducts */ = {
 			isa = PBXGroup;
 			children = (
-				238F10E429B79FA400534A60 /* ListProductsDisplayLogicSpy.swift */,
 				238F10E529B79FA400534A60 /* ListProductsPresentationLogicSpy.swift */,
+				238F10E429B79FA400534A60 /* ListProductsDisplayLogicSpy.swift */,
 				238F10E629B79FA400534A60 /* ListProductsRoutingLogicSpy.swift */,
 				238F10E729B79FA400534A60 /* ListProductsBusinessLogicSpy.swift */,
 				238F10E829B79FA400534A60 /* ListProductsWorkerProtocolSpy.swift */,
