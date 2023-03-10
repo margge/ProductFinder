@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-protocol ProductDetailDisplayLogic {
+protocol ProductDetailDisplayLogic: AnyObject {
     func displayProductDetail(viewModel: ProductDetail.GetProductDetail.ViewModel)
     func displayErrorAlert()
 }
@@ -22,6 +22,8 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     @IBOutlet weak var productQuantityLabel: UILabel!
     @IBOutlet weak var productWarrantyLabel: UILabel!
     @IBOutlet weak var productDescriptionLabel: UILabel!
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var containerView: UIView!
     
     var interactor: ProductDetailBusinessLogic?
     var router: (NSObjectProtocol & ProductDetailRoutingLogic & ProductDetailDataPassing)?
@@ -43,8 +45,8 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     private func setup(){
         let viewController = self
-        let interactor = ProductDetailInteractor()
         let presenter = ProductDetailPresenter()
+        let interactor = ProductDetailInteractor(presenter: presenter)
         let router = ProductDetailRouter()
         viewController.interactor = interactor
         viewController.router = router
@@ -69,19 +71,27 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        setupView()
         getProductDetail()
+    }
+    
+    func setupView() {
+        progressIndicator.hidesWhenStopped = true
+        progressIndicator.stopAnimating()
     }
     
     // MARK: Get product details
     
     func getProductDetail(){
         if let productId = productId {
+            showLoading()
             let request = ProductDetail.GetProductDetail.Request(productId: productId)
             interactor?.getProductDetail(request: request)
         }
     }
     
     func displayProductDetail(viewModel: ProductDetail.GetProductDetail.ViewModel) {
+        hideLoading()
         let itemViewModel = viewModel.productItemViewModel
                 
         productConditionLabel.text = itemViewModel.condition
@@ -112,5 +122,15 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
             self.getProductDetail()
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showLoading() {
+        containerView.isHidden = true
+        progressIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        containerView.isHidden = false
+        progressIndicator.stopAnimating()
     }
 }

@@ -20,9 +20,7 @@ final class ListProductsInteractorTests: XCTestCase {
         super.setUp()
         workerSpy = .init()
         presenterSpy = .init()
-        sut = .init()
-        sut.presenter = presenterSpy
-        sut.worker = workerSpy
+        sut = ListProductsInteractor(worker: workerSpy, presenter: presenterSpy)
     }
 
     override func tearDown() {

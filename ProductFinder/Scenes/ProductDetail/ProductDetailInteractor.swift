@@ -15,20 +15,29 @@ protocol ProductDetailDataStore {
 }
 
 class ProductDetailInteractor: ProductDetailBusinessLogic, ProductDetailDataStore {
+
+    var worker: ProductDetailWorkerProtocol
+    var presenter: ProductDetailPresentationLogic
     
-    var presenter: ProductDetailPresentationLogic?
-    var worker: ProductDetailWorkerProtocol = ProductDetailWorker()
+    init(worker: ProductDetailWorkerProtocol = ProductDetailWorker(),
+         presenter: ProductDetailPresentationLogic) {
+        self.worker = worker
+        self.presenter = presenter
+    }
     
     // MARK: GetProductDetail
     
     func getProductDetail(request: ProductDetail.GetProductDetail.Request) {
         
-        worker.getProductDetail(productId: request.productId, completitionHandler: { itemsData in
+        worker.getProductDetail(productId: request.productId,
+                                completitionHandler: { [weak self] itemsData in
             
             let response = ProductDetail.GetProductDetail.Response(items: itemsData)
-            self.presenter?.presentProductDetail(response: response)
-        }, completitionFailure: {
-            self.presenter?.presentError()
+            self?.presenter.presentProductDetail(response: response)
+            
+        }, completitionFailure: {[weak self] in
+            
+            self?.presenter.presentError()
         })
     }
 }

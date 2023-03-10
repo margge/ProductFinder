@@ -19,6 +19,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebS-lE-8zx">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gh2-8W-ePK">
+                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M99-B2-jle">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
@@ -125,8 +128,10 @@
                                     <constraint firstItem="M99-B2-jle" firstAttribute="width" secondItem="ebS-lE-8zx" secondAttribute="width" id="7bk-fi-rsK"/>
                                     <constraint firstItem="M99-B2-jle" firstAttribute="height" secondItem="ebS-lE-8zx" secondAttribute="height" priority="250" id="7ta-0s-Yrs"/>
                                     <constraint firstItem="M99-B2-jle" firstAttribute="top" secondItem="ebS-lE-8zx" secondAttribute="top" id="ICF-sM-fkt"/>
+                                    <constraint firstItem="gh2-8W-ePK" firstAttribute="centerY" secondItem="M99-B2-jle" secondAttribute="centerY" id="RfM-26-67B"/>
                                     <constraint firstAttribute="bottom" secondItem="M99-B2-jle" secondAttribute="bottom" id="VA0-5J-nH6"/>
                                     <constraint firstItem="M99-B2-jle" firstAttribute="leading" secondItem="ebS-lE-8zx" secondAttribute="leading" id="cXT-ZQ-Svv"/>
+                                    <constraint firstItem="gh2-8W-ePK" firstAttribute="centerX" secondItem="M99-B2-jle" secondAttribute="centerX" id="fYb-gz-gm2"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -140,6 +145,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="M99-B2-jle" id="SgV-is-yqG"/>
                         <outlet property="productConditionLabel" destination="Uxl-h3-Yqp" id="PkR-Ag-KCz"/>
                         <outlet property="productDescriptionLabel" destination="3Fw-dk-7EH" id="9Zk-i3-hV5"/>
                         <outlet property="productImage" destination="m1W-sQ-WEd" id="nc4-9h-DQQ"/>
@@ -147,6 +153,7 @@
                         <outlet property="productQuantityLabel" destination="lZd-su-kR9" id="Vv4-hy-WOl"/>
                         <outlet property="productTittleLabel" destination="65k-CF-C9x" id="zEd-aI-QKJ"/>
                         <outlet property="productWarrantyLabel" destination="6rJ-eU-sCe" id="nSu-TJ-v1p"/>
+                        <outlet property="progressIndicator" destination="gh2-8W-ePK" id="iOh-x8-UPQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kUu-WY-Gux" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

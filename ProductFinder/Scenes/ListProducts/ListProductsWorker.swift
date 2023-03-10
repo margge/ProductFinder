@@ -17,10 +17,16 @@ protocol ListProductsWorkerProtocol {
 
 class ListProductsWorker: ListProductsWorkerProtocol {
     
+    private let networkProvider: NetworkProviderProtocol
+    
+    init(networkProvider: NetworkProviderProtocol = NetworkProvider.shared) {
+        self.networkProvider = networkProvider
+    }
+    
     func getProductsByCategory(completitionHandler: @escaping (ProductData) -> Void,
                                completitionFailure: @escaping (_ error: Error?) -> ()) {
         
-        NetworkProvider.shared.getProductsByCategory { products in
+        networkProvider.getProductsByCategory { products in
             completitionHandler(products)
         } failure: { error in
             print("[\(ListProductsWorker.self)] - getProductsByCategory: \(String(describing: error))")
@@ -32,7 +38,7 @@ class ListProductsWorker: ListProductsWorkerProtocol {
                              completitionHandler: @escaping (ProductData) -> Void,
                              completitionFailure: @escaping () -> ()) {
         
-        NetworkProvider.shared.getProductsBySearch(searchQuery: query) { products in
+        networkProvider.getProductsBySearch(searchQuery: query) { products in
             completitionHandler(products)
         } failure: { error in
             print("[\(ListProductsWorker.self)] - getProductsBySearch: \(String(describing: error))")

@@ -8,7 +8,20 @@
 import Foundation
 import Alamofire
 
-final class NetworkProvider {
+protocol NetworkProviderProtocol {
+    func getProductsByCategory(success: @escaping (_ productsData:ProductData) -> (),
+                               failure: @escaping (_ error: Error?) -> ())
+    
+    func getProductsBySearch(searchQuery: String,
+                             success: @escaping (_ productData: ProductData) -> (),
+                             failure: @escaping (_ error: Error?) -> ())
+    
+    func getProductDetail(productId: String,
+                          success: @escaping (_ itemData: [ItemData]) -> (),
+                          failure: @escaping (_ error: Error?) -> ())
+}
+
+final class NetworkProvider: NetworkProviderProtocol {
     
     static let shared = NetworkProvider()
     

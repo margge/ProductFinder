@@ -14,7 +14,7 @@ protocol ListProductsPresentationLogic {
 
 class ListProductsPresenter: ListProductsPresentationLogic {
     
-    var viewController: ListProductsDisplayLogic?
+    weak var viewController: ListProductsDisplayLogic?
     
     // MARK: presentProducts
     

@@ -13,7 +13,8 @@ protocol ProductDetailPresentationLogic {
 }
 
 class ProductDetailPresenter: ProductDetailPresentationLogic {
-    var viewController: ProductDetailDisplayLogic?
+    
+    weak var viewController: ProductDetailDisplayLogic?
     
     // MARK: presentProductDetail
     
@@ -44,11 +45,11 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
                                                               price: String(productDetail.price),
                                                               availableQuantity: String(productDetail.availableQuantity),
                                                               soldQuantity: String(productDetail.soldQuantity),
-                                                              condition: productDetail.condition,
+                                                              condition: productDetail.condition ?? "",
                                                               thumbnail: productDetail.thumbnail,
-                                                              internationalDelivery: productDetail.internationalDelivery,
+                                                              internationalDelivery: productDetail.internationalDelivery ?? "",
                                                               attributes: attributesViewModelList,
-                                                              warranty: productDetail.warranty,
+                                                              warranty: productDetail.warranty ?? "",
                                                               description: productDetailDescription)
             
             let viewModel = ProductDetail.GetProductDetail.ViewModel(productItemViewModel: productDetailViewModel)

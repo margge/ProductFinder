@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-protocol ListProductsDisplayLogic {
+protocol ListProductsDisplayLogic: AnyObject {
     func displayProducts(viewModel: ListProducts.Load.ViewModel)
     func displayErrorAlert()
 }
@@ -42,12 +42,11 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
     
     private func setup(){
         let viewController = self
-        let interactor = ListProductsInteractor()
         let presenter = ListProductsPresenter()
+        let interactor = ListProductsInteractor(presenter: presenter)
         let router = ListProductsRouter()
         viewController.interactor = interactor
         viewController.router = router
-        interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
