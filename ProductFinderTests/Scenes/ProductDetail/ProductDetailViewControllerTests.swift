@@ -3,6 +3,12 @@
 //
 //
 
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
+// swiftlint:disable force_cast
+// swiftlint:disable identifier_name
+// swiftlint:disable implicitly_unwrapped_optional
+// swiftlint:disable line_length
 @testable import ProductFinder
 import XCTest
 
@@ -41,7 +47,7 @@ final class ProductDetailViewControllerTests: XCTestCase {
 
     // MARK: - Tests
     
-    func testGetProductDetail(){
+    func testGetProductDetail() {
         //Given
         sut.productId = ""
         

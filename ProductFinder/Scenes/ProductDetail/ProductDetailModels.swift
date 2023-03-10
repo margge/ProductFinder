@@ -10,7 +10,7 @@ import UIKit
 enum ProductDetail {
     // MARK: Use cases
     
-    enum GetProductDetail{
+    enum GetProductDetail {
         struct Request {
             let productId: String
         }

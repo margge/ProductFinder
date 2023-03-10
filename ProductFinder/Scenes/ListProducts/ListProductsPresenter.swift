@@ -29,9 +29,9 @@ class ListProductsPresenter: ListProductsPresentationLogic {
         
         productData.results.forEach {
             
-            var productImageUrl: String? = nil
+            var productImageUrl: String?
             if let thumbnailUrl = $0.thumbnail {
-                if thumbnailUrl.contains(Constants.kUnSafeHttp){
+                if thumbnailUrl.contains(Constants.kUnSafeHttp) {
                     productImageUrl = thumbnailUrl.replacingOccurrences(of: Constants.kUnSafeHttp, with: Constants.kSafeHttp)
                 }
             }

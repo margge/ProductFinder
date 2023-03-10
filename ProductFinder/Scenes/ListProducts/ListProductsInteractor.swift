@@ -37,7 +37,7 @@ class ListProductsInteractor: ListProductsBusinessLogic, ListProductsDataStore {
             let response = ListProducts.Load.Response(productData: productData)
             self?.presenter.presentProducts(response: response)
             
-        } completitionFailure: { [weak self] error in
+        } completitionFailure: { [weak self] _ in
             self?.presenter.presentError()
         }
     }

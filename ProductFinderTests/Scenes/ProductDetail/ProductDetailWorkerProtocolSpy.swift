@@ -19,7 +19,7 @@ final class ProductDetailWorkerProtocolSpy: ProductDetailWorkerProtocol {
     
     func getProductDetail(productId: String,
                           completitionHandler: @escaping ([ItemData]) -> Void,
-                          completitionFailure: @escaping () -> ()) {
+                          completitionFailure: @escaping () -> Void) {
         getProductDetailCalled = true
         
         if isErrorCase {

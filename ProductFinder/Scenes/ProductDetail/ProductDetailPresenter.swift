@@ -23,7 +23,7 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
         if let productItem = response.items.first {
             let productDetail = productItem.productDetail
             
-            var attributesViewModelList : [AttributeViewModel] = []
+            var attributesViewModelList: [AttributeViewModel] = []
             
             var productDetailDescription: String = ""
             

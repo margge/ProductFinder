@@ -24,7 +24,14 @@ class ListProductsRouter: NSObject, ListProductsRoutingLogic, ListProductsDataPa
     
     func routeToProductDetail(with productId: String) {
         let storyboard = UIStoryboard(name: Constants.kProductDetailStoryboard, bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: Constants.kProductDetailViewController) as! ProductDetailViewController
+        let dVC = storyboard.instantiateViewController(
+            withIdentifier: Constants.kProductDetailViewController)
+        
+        guard let destinationVC = dVC as? ProductDetailViewController else {
+            assertionFailure("cast failed")
+            return
+        }
+        
         destinationVC.productId = productId
         navigateToSomewhere(source: viewController!, destination: destinationVC)
     }

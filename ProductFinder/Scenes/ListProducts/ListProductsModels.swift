@@ -7,11 +7,11 @@
 
 import UIKit
 
-enum ListProducts{
+enum ListProducts {
     
     // MARK: Use cases
     
-    enum Load{
+    enum Load {
         struct Request {
         }
         struct Response {
@@ -22,9 +22,9 @@ enum ListProducts{
         }
     }
     
-    enum Search{
+    enum Search {
         struct Request {
-            let query:String
+            let query: String
         }
         struct Response {
             let productData: ProductData

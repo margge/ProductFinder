@@ -10,7 +10,7 @@ import UIKit
 protocol ProductDetailWorkerProtocol {
     func getProductDetail(productId: String,
                           completitionHandler: @escaping ([ItemData]) -> Void,
-                          completitionFailure: @escaping () -> ())
+                          completitionFailure: @escaping () -> Void)
 }
 
 class ProductDetailWorker: ProductDetailWorkerProtocol {
@@ -23,7 +23,7 @@ class ProductDetailWorker: ProductDetailWorkerProtocol {
     
     func getProductDetail(productId: String,
                           completitionHandler: @escaping ([ItemData]) -> Void,
-                          completitionFailure: @escaping () -> ()) {
+                          completitionFailure: @escaping () -> Void) {
         
         networkProvider.getProductDetail(productId: productId) { itemsData in
             completitionHandler(itemsData)

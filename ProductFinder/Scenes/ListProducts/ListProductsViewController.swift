@@ -21,27 +21,27 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
     @IBOutlet weak var searchProductsLoading: UIActivityIndicatorView!
     
     var productsList = [ProductViewModel]()
-    var cellWidth = UIScreen.main.bounds.width / 2
-    var refresher:UIRefreshControl!
+    private var cellWidth = UIScreen.main.bounds.width / 2
+    private var refresher: UIRefreshControl!
     
     var interactor: ListProductsBusinessLogic?
     var router: (NSObjectProtocol & ListProductsRoutingLogic & ListProductsDataPassing)?
     
     // MARK: Object lifecycle
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder){
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     // MARK: Setup
     
-    private func setup(){
+    private func setup() {
         let viewController = self
         let presenter = ListProductsPresenter()
         let interactor = ListProductsInteractor(presenter: presenter)
@@ -55,7 +55,7 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
     
     // MARK: View lifecycle
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.kAppName
         
@@ -152,7 +152,7 @@ extension ListProductsViewController: UISearchBarDelegate {
         }
     }
     
-    func searchProducts(query: String){
+    func searchProducts(query: String) {
         showLoading()
         
         let request = ListProducts.Search.Request(query: query)
@@ -170,7 +170,13 @@ extension ListProductsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.kProductCellIdentifier, for: indexPath) as! ProductCollectionViewCell
+        let abstractCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: Constants.kProductCellIdentifier, for: indexPath)
+        
+        guard let cell = abstractCell as? ProductCollectionViewCell else {
+            assertionFailure("Cast failed")
+            return ProductCollectionViewCell()
+        }
         
         let productViewModel = productsList[indexPath.row]
         

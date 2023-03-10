@@ -2,7 +2,7 @@
 //  ListProductsViewControllerTests.swift
 //
 //
-
+// swiftlint:disable force_cast
 @testable import ProductFinder
 import XCTest
 

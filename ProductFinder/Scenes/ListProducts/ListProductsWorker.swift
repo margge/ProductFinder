@@ -9,10 +9,10 @@ import UIKit
 
 protocol ListProductsWorkerProtocol {
     func getProductsByCategory(completitionHandler: @escaping (ProductData) -> Void,
-                               completitionFailure: @escaping (_ error: Error?) -> ())
+                               completitionFailure: @escaping (_ error: Error?) -> Void)
     func getProductsBySearch(query: String,
                              completitionHandler: @escaping (ProductData) -> Void,
-                             completitionFailure: @escaping () -> ())
+                             completitionFailure: @escaping () -> Void)
 }
 
 class ListProductsWorker: ListProductsWorkerProtocol {
@@ -24,7 +24,7 @@ class ListProductsWorker: ListProductsWorkerProtocol {
     }
     
     func getProductsByCategory(completitionHandler: @escaping (ProductData) -> Void,
-                               completitionFailure: @escaping (_ error: Error?) -> ()) {
+                               completitionFailure: @escaping (_ error: Error?) -> Void) {
         
         networkProvider.getProductsByCategory { products in
             completitionHandler(products)
@@ -36,7 +36,7 @@ class ListProductsWorker: ListProductsWorkerProtocol {
     
     func getProductsBySearch(query: String,
                              completitionHandler: @escaping (ProductData) -> Void,
-                             completitionFailure: @escaping () -> ()) {
+                             completitionFailure: @escaping () -> Void) {
         
         networkProvider.getProductsBySearch(searchQuery: query) { products in
             completitionHandler(products)

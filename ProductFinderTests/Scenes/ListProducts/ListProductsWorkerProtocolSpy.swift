@@ -19,7 +19,7 @@ final class ListProductsWorkerProtocolSpy: ListProductsWorkerProtocol {
     // MARK: - ListProductsWorkerProtocol
     
     func getProductsByCategory(completitionHandler: @escaping (ProductData) -> Void,
-                               completitionFailure: @escaping (Error?) -> ()) {
+                               completitionFailure: @escaping (Error?) -> Void) {
 
         getProductsByCategoryCalled = true
         
@@ -34,7 +34,7 @@ final class ListProductsWorkerProtocolSpy: ListProductsWorkerProtocol {
     
     func getProductsBySearch(query: String,
                              completitionHandler: @escaping (ProductData) -> Void,
-                             completitionFailure: @escaping () -> ()) {
+                             completitionFailure: @escaping () -> Void) {
         getProductsBySearchCalled = true
         
         if isErrorCase {

@@ -5,6 +5,7 @@
 //  Created by Margge Guiza
 //
 
+// swiftlint:disable implicitly_unwrapped_optional
 @testable import ProductFinder
 
 final class APISpy: NetworkProviderProtocol {
@@ -29,8 +30,8 @@ final class APISpy: NetworkProviderProtocol {
     
     // MARK: - ListProductsWorkerProtocol
     
-    func getProductsByCategory(success: @escaping (ProductData) -> (),
-                               failure: @escaping (Error?) -> ()) {
+    func getProductsByCategory(success: @escaping (ProductData) -> Void,
+                               failure: @escaping (Error?) -> Void) {
         
         getProductsByCategoryCalled = true
         
@@ -50,8 +51,8 @@ final class APISpy: NetworkProviderProtocol {
     }
     
     func getProductsBySearch(searchQuery: String,
-                             success: @escaping (ProductData) -> (),
-                             failure: @escaping (Error?) -> ()) {
+                             success: @escaping (ProductData) -> Void,
+                             failure: @escaping (Error?) -> Void) {
         
         getProductsBySearchCalled = true
         
@@ -71,8 +72,8 @@ final class APISpy: NetworkProviderProtocol {
     }
     
     func getProductDetail(productId: String,
-                          success: @escaping ([ItemData]) -> (),
-                          failure: @escaping (Error?) -> ()) {
+                          success: @escaping ([ItemData]) -> Void,
+                          failure: @escaping (Error?) -> Void) {
         
         getProductDetailCalled = true
         

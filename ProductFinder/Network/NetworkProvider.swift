@@ -9,16 +9,16 @@ import Foundation
 import Alamofire
 
 protocol NetworkProviderProtocol {
-    func getProductsByCategory(success: @escaping (_ productsData:ProductData) -> (),
-                               failure: @escaping (_ error: Error?) -> ())
+    func getProductsByCategory(success: @escaping (_ productsData: ProductData) -> Void,
+                               failure: @escaping (_ error: Error?) -> Void)
     
     func getProductsBySearch(searchQuery: String,
-                             success: @escaping (_ productData: ProductData) -> (),
-                             failure: @escaping (_ error: Error?) -> ())
+                             success: @escaping (_ productData: ProductData) -> Void,
+                             failure: @escaping (_ error: Error?) -> Void)
     
     func getProductDetail(productId: String,
-                          success: @escaping (_ itemData: [ItemData]) -> (),
-                          failure: @escaping (_ error: Error?) -> ())
+                          success: @escaping (_ itemData: [ItemData]) -> Void,
+                          failure: @escaping (_ error: Error?) -> Void)
 }
 
 final class NetworkProvider: NetworkProviderProtocol {
@@ -30,14 +30,14 @@ final class NetworkProvider: NetworkProviderProtocol {
     private let KBaseUrl = "https://api.mercadolibre.com/"
     private let kStatusOk = 200...299
     
-    func getProductsByCategory(success: @escaping (_ productsData:ProductData) -> (),
-                               failure: @escaping (_ error: Error?) -> ()) {
+    func getProductsByCategory(success: @escaping (_ productsData: ProductData) -> Void,
+                               failure: @escaping (_ error: Error?) -> Void) {
         
         let url = "\(KBaseUrl)sites/\(kBaseSite)/search?category=\(kBaseCategory)"
         
         AF.request(url, method: .get)
             .validate(statusCode: kStatusOk)
-            .responseDecodable (of: ProductData.self) { response in
+            .responseDecodable(of: ProductData.self) { response in
                 
                 if let productData = response.value {
                     success(productData)
@@ -51,14 +51,14 @@ final class NetworkProvider: NetworkProviderProtocol {
     }
     
     func getProductsBySearch(searchQuery: String,
-                             success: @escaping (_ productData: ProductData) -> (),
-                             failure: @escaping (_ error: Error?) -> ()) {
+                             success: @escaping (_ productData: ProductData) -> Void,
+                             failure: @escaping (_ error: Error?) -> Void) {
         
         let url = "\(KBaseUrl)sites/\(kBaseSite)/search?q=\(searchQuery)"
         
         AF.request(url, method: .get)
             .validate(statusCode: kStatusOk)
-            .responseDecodable (of: ProductData.self) { response in
+            .responseDecodable(of: ProductData.self) { response in
                 
                 if let productData = response.value {
                     success(productData)
@@ -72,14 +72,14 @@ final class NetworkProvider: NetworkProviderProtocol {
     }
     
     func getProductDetail(productId: String,
-                          success: @escaping (_ itemData: [ItemData]) -> (),
-                          failure: @escaping (_ error: Error?) -> ()) {
+                          success: @escaping (_ itemData: [ItemData]) -> Void,
+                          failure: @escaping (_ error: Error?) -> Void) {
         
         let url = "\(KBaseUrl)/items?ids=\(productId)"
         
         AF.request(url, method: .get)
             .validate(statusCode: kStatusOk)
-            .responseDecodable (of: [ItemData].self) { response in
+            .responseDecodable(of: [ItemData].self) { response in
                 
                 if let productData = response.value {
                     success(productData)

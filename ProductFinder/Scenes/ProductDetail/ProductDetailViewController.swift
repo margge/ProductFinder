@@ -27,23 +27,23 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     var interactor: ProductDetailBusinessLogic?
     var router: (NSObjectProtocol & ProductDetailRoutingLogic & ProductDetailDataPassing)?
-    var productId : String?
+    var productId: String?
     
     // MARK: Object lifecycle
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?){
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder){
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     // MARK: Setup
     
-    private func setup(){
+    private func setup() {
         let viewController = self
         let presenter = ProductDetailPresenter()
         let interactor = ProductDetailInteractor(presenter: presenter)
@@ -58,7 +58,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     // MARK: Routing
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
             if let router = router, router.responds(to: selector) {
@@ -69,7 +69,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     // MARK: View lifecycle
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.kAppName
         setupView()
@@ -83,7 +83,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     // MARK: Get product details
     
-    func getProductDetail(){
+    func getProductDetail() {
         if let productId = productId {
             showLoading()
             let request = ProductDetail.GetProductDetail.Request(productId: productId)
