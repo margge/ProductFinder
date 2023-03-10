@@ -43,7 +43,6 @@ final class ListProductsViewControllerTests: XCTestCase {
     // MARK: - Tests
     
     func testLoadProducts() {
-        
         //When
         sut.loadProducts()
         
@@ -53,8 +52,7 @@ final class ListProductsViewControllerTests: XCTestCase {
         XCTAssertTrue(interactorSpy.loadProductsCalled)
     }
     
-    func testDisplayProducts() {
-        
+    func testDisplayProducts() {        
         //Given
         let productViewModel = ProductViewModel.init(id: "5", title: "Nintendo Switch", thumbnail: "", price: "40000")
         let productViewModelList = [productViewModel, productViewModel, productViewModel, productViewModel]
