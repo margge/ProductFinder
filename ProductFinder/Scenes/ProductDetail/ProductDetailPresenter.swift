@@ -33,19 +33,21 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
                                                              valueName: $0.valueName)
                 
                 if let attrName = $0.name, let attrValueName = $0.valueName {
-                    productDetailDescription.append(contentsOf: "▸ \(attrName): \(attrValueName)\n")
+                    productDetailDescription.append(contentsOf: "▸ \(attrName): \(attrValueName)\n\n")
                     
                 }
                 
                 attributesViewModelList.append(attributesViewModel)
             }
             
+            let productCondition = Constants.kProductConditions[productDetail.condition]
+            
             let productDetailViewModel = ProductItemViewModel(id: productDetail.id,
                                                               title: productDetail.title,
-                                                              price: String(productDetail.price),
+                                                              price: "$\(productDetail.price)",
                                                               availableQuantity: String(productDetail.availableQuantity),
                                                               soldQuantity: String(productDetail.soldQuantity),
-                                                              condition: productDetail.condition ?? "",
+                                                              condition: productCondition ?? "",
                                                               thumbnail: productDetail.thumbnail,
                                                               internationalDelivery: productDetail.internationalDelivery ?? "",
                                                               attributes: attributesViewModelList,

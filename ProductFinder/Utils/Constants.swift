@@ -19,4 +19,6 @@ struct Constants {
     
     static let kProductDetailStoryboard = "ProductDetail"
     static let kProductDetailViewController = "ProductDetailViewController"
+    
+    static let kProductConditions = ["new": "Nuevo", "used": "Usado"]
 }

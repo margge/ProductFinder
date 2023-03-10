@@ -25,7 +25,7 @@ struct ProductItem: Decodable {
     let price: Double
     let availableQuantity: Int
     let soldQuantity: Int
-    let condition: String?
+    let condition: String
     let thumbnail: String?
     let internationalDelivery: String?
     let attributes: [Attribute]

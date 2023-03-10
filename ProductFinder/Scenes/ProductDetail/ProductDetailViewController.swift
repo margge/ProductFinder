@@ -71,6 +71,7 @@ class ProductDetailViewController: UIViewController, ProductDetailDisplayLogic {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        title = Constants.kAppName
         setupView()
         getProductDetail()
     }
