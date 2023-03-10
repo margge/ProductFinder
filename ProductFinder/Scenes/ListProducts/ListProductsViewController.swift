@@ -22,6 +22,7 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
     
     var productsList = [ProductViewModel]()
     var cellWidth = UIScreen.main.bounds.width / 2
+    var refresher:UIRefreshControl!
     
     var interactor: ListProductsBusinessLogic?
     var router: (NSObjectProtocol & ListProductsRoutingLogic & ListProductsDataPassing)?
@@ -59,10 +60,17 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
         title = Constants.kAppName
         
         setupView()
+        
+        showLoading()
         loadProducts()
     }
     
     func setupView() {
+        refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.gray
+        refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        productsCollectionView!.refreshControl = refresher
+        
         productsCollectionView.register(UINib(nibName: Constants.kProductCollectionViewCell, bundle: nil),
                                         forCellWithReuseIdentifier: Constants.kProductCellIdentifier)
         productsCollectionView.dataSource = self
@@ -73,15 +81,24 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
         searchProductsLoading.stopAnimating()
     }
     
+    @objc func loadData() {
+        loadProducts()
+        productsCollectionView.refreshControl?.beginRefreshing()
+    }
+    
+    func stopRefresher() {
+        productsCollectionView.refreshControl?.endRefreshing()
+    }
+    
     // MARK: Load Products
     
     func loadProducts() {
-        showLoading()
         let request = ListProducts.Load.Request()
         interactor?.loadProducts(request: request)
     }
     
     func displayProducts(viewModel: ListProducts.Load.ViewModel) {
+        stopRefresher()
         productsList = viewModel.productListViewModel.results
         productsCollectionView.reloadData()
         hideLoading()
