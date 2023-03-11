@@ -65,6 +65,14 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
         loadProducts()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            if UIDevice.current.orientation.isLandscape {
+                print("landscape")
+            } else {
+                print("portrait")
+            }
+        }
+    
     func setupView() {
         refresher = UIRefreshControl()
         refresher.tintColor = UIColor.gray
@@ -133,6 +141,14 @@ class ListProductsViewController: UIViewController, ListProductsDisplayLogic {
 extension ListProductsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("*****landscape")
+        } else {
+            print("*****portrait")
+        }
+        
         return CGSize(width: cellWidth, height: cellWidth)
     }
 }
