@@ -21,4 +21,7 @@ struct Constants {
     static let kProductDetailViewController = "ProductDetailViewController"
     
     static let kProductConditions = ["new": "Nuevo", "used": "Usado"]
+    
+    static let kCountryCode = "CLP"
+    static let kCountryIdentifier = "es_CL"
 }

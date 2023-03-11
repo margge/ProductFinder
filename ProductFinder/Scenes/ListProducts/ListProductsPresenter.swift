@@ -36,10 +36,12 @@ class ListProductsPresenter: ListProductsPresentationLogic {
                 }
             }
             
+            let formattedProductPrice = $0.price?.formatAmmount() ?? ""
+            
             let productViewModel = ProductViewModel(id: $0.id,
                                                     title: $0.title,
                                                     thumbnail: productImageUrl,
-                                                    price: "$\($0.price)")
+                                                    price: formattedProductPrice)
             
             productViewModels.append(productViewModel)
         }

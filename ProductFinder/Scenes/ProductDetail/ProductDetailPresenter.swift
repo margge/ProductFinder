@@ -42,9 +42,11 @@ class ProductDetailPresenter: ProductDetailPresentationLogic {
             
             let productCondition = Constants.kProductConditions[productDetail.condition]
             
+            let formattedProductPrice = productDetail.price?.formatAmmount() ?? ""
+            
             let productDetailViewModel = ProductItemViewModel(id: productDetail.id,
                                                               title: productDetail.title,
-                                                              price: "$\(productDetail.price)",
+                                                              price: formattedProductPrice,
                                                               availableQuantity: String(productDetail.availableQuantity),
                                                               soldQuantity: String(productDetail.soldQuantity),
                                                               condition: productCondition ?? "",

@@ -21,5 +21,5 @@ struct Product: Decodable {
     let id: String
     let title: String
     let thumbnail: String?
-    let price: Double
+    let price: Double?
 }
